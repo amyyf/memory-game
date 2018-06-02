@@ -1,13 +1,16 @@
-.container {
+#container {
   border: 1px solid black;
 }
 
 .card {
+  background-color: white;
   height: 100px;
   width: 100px;
   border: 1px solid black;
 }
 
-.card::after {
+.flip {
   background-color: red;
+  transform: rotateY(180deg);
+  transition: transform 1s linear, background-color 0s .5s;
 }
