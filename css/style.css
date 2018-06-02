@@ -1,4 +1,13 @@
 .container {
-  display: flex;
   border: 1px solid black;
+}
+
+.card {
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+}
+
+.card::after {
+  background-color: red;
 }
