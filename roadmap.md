@@ -14,7 +14,7 @@
     - [x] pair matching
         - cards should have same class, check if class matches
     - [x] pair not matching
-    - [ ] game win
+    - [x] game win
     - [ ] modal popping up on game win
         - displays data: congratulations, time took, and star rating
         - gives option to play again
