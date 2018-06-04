@@ -13,7 +13,7 @@
     - [x] card flipping
     - [x] pair matching
         - cards should have same class, check if class matches
-    - [ ] pair not matching
+    - [x] pair not matching
     - [ ] game win
     - [ ] modal popping up on game win
         - displays data: congratulations, time took, and star rating
