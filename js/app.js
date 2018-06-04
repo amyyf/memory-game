@@ -8,7 +8,7 @@ let clicks = 0;
 let maxClicks = 2;
 
 container.addEventListener('click', function (event) {
-  if (clicks > maxClicks) {
+  if (clicks >= maxClicks) {
     return; // TODO: need to reset click counter but change rules later on in function to enable continued gameplay
   }
   let card = event.target;
@@ -16,11 +16,13 @@ container.addEventListener('click', function (event) {
     return; // disables flipped card from being clicked again
   }
   card.classList.toggle('flip');
-  clicks ++;
+  clicks++;
   console.log(clicks);
   flipped.push(card); // gives me access to flipped cards to check if they match
   if (flipped.length === 2) {
-    flipped[0].className === flipped[1].className ? console.log('match') : console.log('try again');
+    let card1 = flipped[0];
+    let card2 = flipped[1];
+    card1.className === card2.className ? cardsMatch(card1, card2) : flipped = '';
   } else if (flipped.length > 2) {
     for (let j = 0; j < flipped.length; j++) {
       flipped[j].classList.toggle('flip'); // erases 'flip' class from cards
@@ -29,3 +31,8 @@ container.addEventListener('click', function (event) {
   }
   console.log(flipped);
 });
+
+function cardsMatch (card1, card2) {
+  card1.classList.toggle('matched');
+  card2.classList.toggle('matched');
+}
