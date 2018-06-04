@@ -27,5 +27,6 @@
     - [ ] use Math.random() to assign an id from 1-16 to each element? -> to assign a flex position?
      https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 - start button for initial shuffle? lksdljflksdlkjfakllskdfj  skjf skd  fkjjsjf kdkjf
+- [ ] how to keep container from flipping
 
 **The cards always exist - what changes is the order (via JS) or the styling (via JS events and CSS styles)**

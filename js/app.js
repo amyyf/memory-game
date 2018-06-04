@@ -6,11 +6,16 @@ let flipped = [];
 let clicks = 0;
 let maxClicks = 2;
 
+// click event handler
 container.addEventListener('click', function (event) {
   if (clicks >= maxClicks) {
     return;
   }
   let card = event.target;
+  if (card.tagName !== 'DIV') {
+    console.log('do not click on the container');
+    return; // disallows clicks not on cards
+  }
   if (card.classList.contains('flip')) {
     return; // disables flipped card from being clicked again
   }
@@ -29,6 +34,7 @@ container.addEventListener('click', function (event) {
   console.log(flipped);
 });
 
+// callback function definitions
 function cardsMatch (card1, card2) {
   card1.classList.toggle('matched');
   card2.classList.toggle('matched');
