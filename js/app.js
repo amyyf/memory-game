@@ -1,11 +1,19 @@
 let container = document.getElementById('container');
 let siblings = container.children;
 let flipped = [];
-let totalRemaining = 4;
+let totalRemaining = siblings.length;
+let playButton = document.getElementById('new-game-button');
 
 // only allow two clicks before checking/resetting game
 let clicks = 0;
 let maxClicks = 2;
+
+playButton.addEventListener('click', function () {
+  siblings = randomizeCards(siblings); // TODO: not sure this works correctly, hard to tell with only four cards - check carefully!
+  clicks = 0;
+  flipped = [];
+  totalRemaining = siblings.length;
+});
 
 // click event handler
 container.addEventListener('click', function (event) {
@@ -40,6 +48,15 @@ container.addEventListener('click', function (event) {
 });
 
 // function definitions
+function randomizeCards (cardsList) {
+  for (let i = cardsList.length - 1; i >= 0; i--) {
+    let currentCard = cardsList[i];
+    let randomNum = Math.floor(Math.random() * (i + 1));
+    cardsList[i] = cardsList[randomNum];
+    cardsList[randomNum] = currentCard;
+  } return cardsList;
+}
+
 function cardsMatch (card1, card2) {
   card1.classList.toggle('matched');
   card2.classList.toggle('matched');
