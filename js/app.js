@@ -3,7 +3,7 @@ let siblings = container.children;
 let flipped = [];
 let totalRemaining = 4;
 
-// early returns click event function after 2 clicks on different cards
+// only allow two clicks before checking/resetting game
 let clicks = 0;
 let maxClicks = 2;
 
@@ -24,34 +24,33 @@ container.addEventListener('click', function (event) {
   flipped.push(card); // gives me access to flipped cards to check if they match
   let card1 = flipped[0];
   let card2 = flipped[1];
-  if (flipped.length <= 2) {
-    card1.className === card2.className ? cardsMatch(card1, card2) : noMatch(card1, card2);
-  } else {
-    noMatch(card1, card2);
+
+  if (flipped.length < 2) {
+    return;
   }
-  flipped = []; // resets data structure to allow play to continue
+  card1.className === card2.className ? cardsMatch(card1, card2) : noMatch(card1, card2);
+  flipped = [];
+  clicks = 0; // resets data structure to allow play to continue
   console.log(flipped);
+
   // scoring/game-end logic
-  for (sibling of siblings) {
-    cardsLeft();
+  for (let sibling of siblings) {
+    cardsLeft(sibling);
   }
 });
 
-// callback function definitions
+// function definitions
 function cardsMatch (card1, card2) {
   card1.classList.toggle('matched');
   card2.classList.toggle('matched');
-  clicks = 0;
 }
 
 function noMatch (card1, card2) {
   card1.classList.toggle('flip');
   card2.classList.toggle('flip');
-  flipped = [];
-  clicks = 0;
 }
 
-function cardsLeft () {
+function cardsLeft (sibling) {
   if (sibling.classList.contains('matched')) {
     totalRemaining--;
     console.log(totalRemaining);
