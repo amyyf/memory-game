@@ -7,7 +7,8 @@ let resetButton = document.getElementById('reset-button');
 // let timer = document.getElementById('timer');
 let mins = document.getElementById('mins');
 let secs = document.getElementById('secs');
-let moves = document.getElementById('move-counter');
+let moveCounter = document.getElementById('move-counter');
+let moves = moveCounter.textContent;
 
 // start and reset functionality
 startButton.addEventListener('click', function () {
@@ -24,6 +25,8 @@ startButton.addEventListener('click', function () {
     clicks = 0;
     flipped = [];
     totalRemaining = siblings.length;
+    moves = 0;
+    moveCounter.textContent = moves;
   });
   function count () {
     console.log('calling function count');
@@ -92,14 +95,15 @@ function randomizeCards (cardsList) {
 function cardsMatch (card1, card2) {
   card1.classList.toggle('matched');
   card2.classList.toggle('matched');
-  let currentMoves = moves.textContent;
-  currentMoves++;
-  moves.textContent = currentMoves;
+  moves++;
+  moveCounter.textContent = moves;
 }
 
 function noMatch (card1, card2) {
   card1.classList.toggle('flip');
   card2.classList.toggle('flip');
+  moves++;
+  moveCounter.textContent = moves;
 }
 
 function cardsLeft (sibling) {
