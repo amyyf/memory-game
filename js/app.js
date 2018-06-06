@@ -4,15 +4,12 @@ let flipped = [];
 let totalRemaining = siblings.length;
 let startButton = document.getElementById('start-button');
 let resetButton = document.getElementById('reset-button');
-/* let timer = document.getElementById('timer');
+// let timer = document.getElementById('timer');
 let mins = document.getElementById('mins');
 let secs = document.getElementById('secs');
-*/
+let moves = document.getElementById('move-counter');
 
-// only allow two clicks before checking/resetting game
-let clicks = 0;
-let maxClicks = 2;
-
+// start and reset functionality
 startButton.addEventListener('click', function () {
   let startTime = new Date();
   let countTime = setInterval(count, 1000);
@@ -35,14 +32,22 @@ startButton.addEventListener('click', function () {
     let elapsedMs = elapsed.valueOf();
     let diff = elapsedMs - startMs;
     let sec = Math.floor((diff / 1000) % 60);
+    if (sec < 10) {
+      sec = '0' + sec;
+    }
     let min = Math.floor((((diff / 1000) - sec) / 60) % 60);
-    console.log('secs: ' + sec + ' mins: ' + min);
+    if (min < 10) {
+      min = '0' + min;
+    }
+    secs.textContent = sec;
+    mins.textContent = min;
   }
-
   siblings = randomizeCards(siblings); // TODO: not sure this works correctly, hard to tell with only four cards - .appendChild?
 });
 
-// click event handler
+// only allow two clicks before checking/resetting game
+let clicks = 0;
+let maxClicks = 2;
 container.addEventListener('click', function (event) {
   if (clicks >= maxClicks) {
     return;
@@ -87,6 +92,9 @@ function randomizeCards (cardsList) {
 function cardsMatch (card1, card2) {
   card1.classList.toggle('matched');
   card2.classList.toggle('matched');
+  let currentMoves = moves.textContent;
+  currentMoves++;
+  moves.textContent = currentMoves;
 }
 
 function noMatch (card1, card2) {

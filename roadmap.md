@@ -8,7 +8,7 @@
     - [ ] reset button
     - [ ] move counter
 1. JavaScript functionality
-    - [ ] timer running
+    - [x] timer running
     - [ ] card shuffling (start button)
     - [x] card flipping
     - [x] pair matching
@@ -18,7 +18,7 @@
     - [ ] modal popping up on game win
         - displays data: congratulations, time took, and star rating
         - gives option to play again
-    - [ ] reset option (resets game board, timer, and star rating)
+    - [x] reset option (resets game board, timer, and star rating)
     - [ ] star rating (begins at 3, drops to 2 after a set number of moves, drops to 1 after even more moves)
 
 
