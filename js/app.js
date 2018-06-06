@@ -2,17 +2,44 @@ let container = document.getElementById('container');
 let siblings = container.children;
 let flipped = [];
 let totalRemaining = siblings.length;
-let playButton = document.getElementById('new-game-button');
+let startButton = document.getElementById('start-button');
+let resetButton = document.getElementById('reset-button');
+/* let timer = document.getElementById('timer');
+let mins = document.getElementById('mins');
+let secs = document.getElementById('secs');
+*/
 
 // only allow two clicks before checking/resetting game
 let clicks = 0;
 let maxClicks = 2;
 
-playButton.addEventListener('click', function () {
-  siblings = randomizeCards(siblings); // TODO: not sure this works correctly, hard to tell with only four cards - check carefully!
-  clicks = 0;
-  flipped = [];
-  totalRemaining = siblings.length;
+startButton.addEventListener('click', function () {
+  let startTime = new Date();
+  let countTime = setInterval(count, 1000);
+  let countAgain;
+  startButton.remove();
+  resetButton.addEventListener('click', function () {
+    clearInterval(countTime);
+    clearInterval(countAgain);
+    startTime = new Date();
+    countAgain = setInterval(count, 1000);
+    siblings = randomizeCards(siblings); // TODO: not sure this works correctly, hard to tell with only four cards - .appendChild?
+    clicks = 0;
+    flipped = [];
+    totalRemaining = siblings.length;
+  });
+  function count () {
+    console.log('calling function count');
+    let elapsed = new Date();
+    let startMs = startTime.valueOf();
+    let elapsedMs = elapsed.valueOf();
+    let diff = elapsedMs - startMs;
+    let sec = Math.floor((diff / 1000) % 60);
+    let min = Math.floor((((diff / 1000) - sec) / 60) % 60);
+    console.log('secs: ' + sec + ' mins: ' + min);
+  }
+
+  siblings = randomizeCards(siblings); // TODO: not sure this works correctly, hard to tell with only four cards - .appendChild?
 });
 
 // click event handler
