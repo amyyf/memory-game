@@ -1,7 +1,7 @@
 let container = document.getElementById('container');
-let siblings = container.children;
+let cards = container.children;
 let flipped = [];
-let totalRemaining = siblings.length;
+let totalRemaining = cards.length;
 let startButton = document.getElementById('start-button');
 let resetButton = document.getElementById('reset-button');
 // let timer = document.getElementById('timer');
@@ -22,10 +22,10 @@ startButton.addEventListener('click', function () {
     clearInterval(countAgain);
     startTime = new Date();
     countAgain = setInterval(count, 1000);
-    siblings = randomizeCards(siblings); // TODO: not sure this works correctly, hard to tell with only four cards - .appendChild?
+    cards = randomizeCards(cards); // TODO: not sure this works correctly, hard to tell with only four cards - .appendChild?
     clicks = 0;
     flipped = [];
-    totalRemaining = siblings.length;
+    totalRemaining = cards.length;
     moves = 0;
     moveCounter.textContent = moves;
   });
@@ -46,7 +46,7 @@ startButton.addEventListener('click', function () {
     secs.textContent = sec;
     mins.textContent = min;
   }
-  siblings = randomizeCards(siblings); // TODO: not sure this works correctly, hard to tell with only four cards - .appendChild?
+  cards = randomizeCards(cards); // TODO: not sure this works correctly, hard to tell with only four cards - .appendChild?
 });
 
 // only allow two clicks before checking/resetting game
@@ -78,13 +78,13 @@ container.addEventListener('click', function (event) {
   console.log(flipped);
 
   // scoring/game-end logic
-  for (let sibling of siblings) {
-    cardsLeft(sibling);
+  for (let card of cards) {
+    cardsLeft(card);
   }
 
   // star rating
-  let loseOne = (siblings.length / 2) * 1.25;
-  let loseTwo = (siblings.length / 2) * 1.6;
+  let loseOne = (cards.length / 2) * 1.25;
+  let loseTwo = (cards.length / 2) * 1.6;
   if (moves > loseOne && moves < loseTwo) {
     let starThree = stars.lastChild;
     starThree.classList.add('lost');
@@ -119,8 +119,8 @@ function noMatch (card1, card2) {
   moveCounter.textContent = moves;
 }
 
-function cardsLeft (sibling) {
-  if (sibling.classList.contains('matched')) {
+function cardsLeft (card) {
+  if (card.classList.contains('matched')) {
     totalRemaining--;
     console.log(totalRemaining);
   }
