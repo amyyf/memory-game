@@ -2,17 +2,46 @@
   border: 1px solid black;
 }
 
-.card,
-.card-1,
-.card-2 {
-  background-color: white;
+.card {
   height: 100px;
   width: 100px;
   border: 1px solid black;
   content: "";
 }
 
-.flip {
+.pair-1 {
+  background-color: red;
+}
+
+.pair-2 {
+  background-color: blue;
+}
+
+.pair-3 {
+  background-color: green;
+}
+
+.pair-4 {
+  background-color: white;
+}
+
+.pair-5 {
+  background-color: black;
+}
+
+.pair-6 {
+  background-color: yellow;
+}
+
+.pair-7 {
+  background-color: purple;
+}
+
+.pair-8 {
+  background-color: pink;
+}
+
+.flipped {
   background-color: red;
   transform: rotateY(180deg);
   transition: transform 1s linear, background-color 0s .5s;

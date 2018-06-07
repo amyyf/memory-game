@@ -16,22 +16,29 @@ startButton.addEventListener('click', function () {
   let startTime = new Date();
   let countTime = setInterval(count, 1000);
   let countAgain;
-  createCards();
+  dealCards();
   startButton.remove();
   resetButton.addEventListener('click', function () {
     clearInterval(countTime);
     clearInterval(countAgain);
     startTime = new Date();
     countAgain = setInterval(count, 1000);
-    // cards = randomizeCards(cards); // TODO: not sure this works correctly, hard to tell with only four cards - .appendChild?
+    randomizeCards(cards);
     clicks = 0;
     flipped = [];
     totalRemaining = cards.length;
     moves = 0;
     moveCounter.textContent = moves;
+    for (let card of cards) {
+      if (card.classList.contains('matched')) {
+        card.classList.remove('matched');
+      }
+      if (card.classList.contains('flipped')) {
+        card.classList.remove('flipped');
+      }
+    }
   });
   function count () {
-    console.log('calling function count');
     let elapsed = new Date();
     let startMs = startTime.valueOf();
     let elapsedMs = elapsed.valueOf();
@@ -47,7 +54,6 @@ startButton.addEventListener('click', function () {
     secs.textContent = sec;
     mins.textContent = min;
   }
-  // cards = randomizeCards(cards); // TODO: not sure this works correctly, hard to tell with only four cards - .appendChild?
 });
 
 // only allow two clicks before checking/resetting game
@@ -61,10 +67,10 @@ container.addEventListener('click', function (event) {
   if (card.tagName !== 'DIV') {
     return; // disallows clicks not on cards
   }
-  if (card.classList.contains('flip')) {
+  if (card.classList.contains('flipped')) {
     return; // disables flipped card from being clicked again
   }
-  card.classList.toggle('flip');
+  card.classList.toggle('flipped');
   clicks++;
   flipped.push(card); // gives me access to flipped cards to check if they match
   let card1 = flipped[0];
@@ -96,7 +102,7 @@ container.addEventListener('click', function (event) {
 });
 
 // function definitions
-function createCards () {
+function dealCards () {
   let cardList = document.createDocumentFragment();
   for (let x = 1; x <= cards; x++) {
     let card = document.createElement('div');
@@ -104,18 +110,28 @@ function createCards () {
     cardList.appendChild(card);
   }
   container.appendChild(cardList);
-  cards = container.children;
+  cards = container.children; // reassign var from # of cards to cards themselves
+  let j = 1;
+  for (let i = 0; i < cards.length; i += 2) {
+    let card = cards[i];
+    card.classList.add('pair-' + [j]);
+    card.nextSibling.classList.add('pair-' + [j]);
+    j++;
+  }
+  randomizeCards(cards);
 }
 
-// function randomizeCards (cardsList) {
-//   for (let i = cardsList.length - 1; i >= 0; i--) {
-//     let currentCard = cardsList[i];
-//     let randomNum = Math.floor(Math.random() * (i + 1));
-//     cardsList[i] = cardsList[randomNum];
-//     cardsList[randomNum] = currentCard;
-//   }
-//   return cardsList;
-// }
+function randomizeCards (cardsList) {
+  let newOrder = document.createDocumentFragment();
+  for (let i = 0; i < cardsList.length; i++) {
+    let randomNum = Math.floor(Math.random() * cardsList.length);
+    let currentCard = cardsList[i];
+    let randomCard = cardsList[randomNum];
+    currentCard = randomCard;
+    newOrder.appendChild(currentCard);
+  }
+  container.appendChild(newOrder);
+}
 
 function cardsMatch (card1, card2) {
   card1.classList.toggle('matched');
@@ -125,8 +141,8 @@ function cardsMatch (card1, card2) {
 }
 
 function noMatch (card1, card2) {
-  card1.classList.toggle('flip');
-  card2.classList.toggle('flip');
+  card1.classList.toggle('flipped');
+  card2.classList.toggle('flipped');
   moves++;
   moveCounter.textContent = moves;
 }
