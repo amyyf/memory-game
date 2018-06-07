@@ -1,7 +1,8 @@
 let container = document.getElementById('container');
-let cards = 16; // initializes desired number of cards
+let cardCount = 16; // initializes desired number of cards
+let pairsRemaining = cardCount / 2;
+let cards = container.children;
 let flipped = [];
-let totalRemaining = cards.length;
 let startButton = document.getElementById('start-button');
 let resetButton = document.getElementById('reset-button');
 // let timer = document.getElementById('timer');
@@ -26,7 +27,7 @@ startButton.addEventListener('click', function () {
     randomizeCards(cards);
     clicks = 0;
     flipped = [];
-    totalRemaining = cards.length;
+    pairsRemaining = cardCount / 2;
     moves = 0;
     moveCounter.textContent = moves;
     for (let card of cards) {
@@ -85,13 +86,15 @@ container.addEventListener('click', function (event) {
   console.log(flipped);
 
   // scoring/game-end logic
-  for (let card of cards) {
-    cardsLeft(card);
+  if (pairsRemaining > 0) {
+    console.log(pairsRemaining);
+  } else {
+    win();
   }
 
   // star rating
-  let loseOne = (cards.length / 2) * 1.25;
-  let loseTwo = (cards.length / 2) * 1.6;
+  let loseOne = (cardCount / 2) * 1.25;
+  let loseTwo = (cardCount / 2) * 1.6;
   if (moves > loseOne && moves < loseTwo) {
     let starThree = stars.lastChild;
     starThree.classList.add('lost');
@@ -104,7 +107,7 @@ container.addEventListener('click', function (event) {
 // function definitions
 function dealCards () {
   let cardList = document.createDocumentFragment();
-  for (let x = 1; x <= cards; x++) {
+  for (let x = 1; x <= cardCount; x++) {
     let card = document.createElement('div');
     card.classList.add('card');
     cardList.appendChild(card);
@@ -138,6 +141,7 @@ function cardsMatch (card1, card2) {
   card2.classList.toggle('matched');
   moves++;
   moveCounter.textContent = moves;
+  pairsRemaining--;
 }
 
 function noMatch (card1, card2) {
@@ -147,12 +151,6 @@ function noMatch (card1, card2) {
   moveCounter.textContent = moves;
 }
 
-function cardsLeft (card) {
-  if (card.classList.contains('matched')) {
-    totalRemaining--;
-    console.log(totalRemaining);
-  }
-  if (totalRemaining === 0) {
-    console.log('you win'); // TODO: what happens when you win - displayModal function
-  }
+function win (card) {
+  console.log('you win'); // TODO: what happens when you win - displayModal function
 }
