@@ -1,5 +1,5 @@
 let container = document.getElementById('container');
-let cards = container.children;
+let cards = 16; // initializes desired number of cards
 let flipped = [];
 let totalRemaining = cards.length;
 let startButton = document.getElementById('start-button');
@@ -16,13 +16,14 @@ startButton.addEventListener('click', function () {
   let startTime = new Date();
   let countTime = setInterval(count, 1000);
   let countAgain;
+  createCards();
   startButton.remove();
   resetButton.addEventListener('click', function () {
     clearInterval(countTime);
     clearInterval(countAgain);
     startTime = new Date();
     countAgain = setInterval(count, 1000);
-    cards = randomizeCards(cards); // TODO: not sure this works correctly, hard to tell with only four cards - .appendChild?
+    // cards = randomizeCards(cards); // TODO: not sure this works correctly, hard to tell with only four cards - .appendChild?
     clicks = 0;
     flipped = [];
     totalRemaining = cards.length;
@@ -46,7 +47,7 @@ startButton.addEventListener('click', function () {
     secs.textContent = sec;
     mins.textContent = min;
   }
-  cards = randomizeCards(cards); // TODO: not sure this works correctly, hard to tell with only four cards - .appendChild?
+  // cards = randomizeCards(cards); // TODO: not sure this works correctly, hard to tell with only four cards - .appendChild?
 });
 
 // only allow two clicks before checking/resetting game
@@ -95,15 +96,26 @@ container.addEventListener('click', function (event) {
 });
 
 // function definitions
-function randomizeCards (cardsList) {
-  for (let i = cardsList.length - 1; i >= 0; i--) {
-    let currentCard = cardsList[i];
-    let randomNum = Math.floor(Math.random() * (i + 1));
-    cardsList[i] = cardsList[randomNum];
-    cardsList[randomNum] = currentCard;
+function createCards () {
+  let cardList = document.createDocumentFragment();
+  for (let x = 1; x <= cards; x++) {
+    let card = document.createElement('div');
+    card.classList.add('card');
+    cardList.appendChild(card);
   }
-  return cardsList;
+  container.appendChild(cardList);
+  cards = container.children;
 }
+
+// function randomizeCards (cardsList) {
+//   for (let i = cardsList.length - 1; i >= 0; i--) {
+//     let currentCard = cardsList[i];
+//     let randomNum = Math.floor(Math.random() * (i + 1));
+//     cardsList[i] = cardsList[randomNum];
+//     cardsList[randomNum] = currentCard;
+//   }
+//   return cardsList;
+// }
 
 function cardsMatch (card1, card2) {
   card1.classList.toggle('matched');
