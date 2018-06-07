@@ -20,3 +20,15 @@
   pointer-events: none;
   opacity: .5;
 }
+
+.star {
+  height: 20px;
+  width: 20px;
+  background-color: black;
+  margin: 3px;
+}
+
+.lost {
+  background-color: white;
+  border: solid black 1px;
+}

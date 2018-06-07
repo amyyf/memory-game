@@ -9,6 +9,7 @@ let mins = document.getElementById('mins');
 let secs = document.getElementById('secs');
 let moveCounter = document.getElementById('move-counter');
 let moves = moveCounter.textContent;
+let stars = document.getElementById('star-rating');
 
 // start and reset functionality
 startButton.addEventListener('click', function () {
@@ -80,6 +81,17 @@ container.addEventListener('click', function (event) {
   for (let sibling of siblings) {
     cardsLeft(sibling);
   }
+
+  // star rating
+  let loseOne = (siblings.length / 2) * 1.25;
+  let loseTwo = (siblings.length / 2) * 1.6;
+  if (moves > loseOne && moves < loseTwo) {
+    let starThree = stars.lastChild;
+    starThree.classList.add('lost');
+  } else if (moves > loseTwo) {
+    let starTwo = stars.firstChild.nextSibling;
+    starTwo.classList.add('lost');
+  }
 });
 
 // function definitions
@@ -89,7 +101,8 @@ function randomizeCards (cardsList) {
     let randomNum = Math.floor(Math.random() * (i + 1));
     cardsList[i] = cardsList[randomNum];
     cardsList[randomNum] = currentCard;
-  } return cardsList;
+  }
+  return cardsList;
 }
 
 function cardsMatch (card1, card2) {
