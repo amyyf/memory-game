@@ -11,6 +11,7 @@ let secs = document.getElementById('secs');
 let moveCounter = document.getElementById('move-counter');
 let moves = moveCounter.textContent;
 let stars = document.getElementById('star-rating');
+let modal = document.createDocumentFragment();
 
 // start and reset functionality
 startButton.addEventListener('click', function () {
@@ -151,6 +152,26 @@ function noMatch (card1, card2) {
   moveCounter.textContent = moves;
 }
 
-function win (card) {
-  console.log('you win'); // TODO: what happens when you win - displayModal function
+function win () {
+  let dialog = document.createElement('dialog');
+  dialog.textContent = 'Congratulations, you won! Would you like to play again?';
+  modal.appendChild(dialog);
+  let button = document.createElement('button');
+  button.textContent = 'Play again';
+  modal.appendChild(button);
+  button.addEventListener('click', function () {
+    // TODO: make this functional
+  });
+  modal.appendChild(stars);
+  let totalMoves = document.createElement('span');
+  totalMoves.textContent = moves;
+  modal.appendChild(totalMoves);
+  let totalMins = document.createElement('span');
+  let totalSecs = document.createElement('span');
+  totalMins.textContent = mins.textContent;
+  totalSecs.textContent = secs.textContent;
+  modal.appendChild(totalMins);
+  modal.appendChild(totalSecs);
+  document.body.appendChild(modal);
+  dialog.showModal();
 }
