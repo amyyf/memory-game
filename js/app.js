@@ -1,7 +1,7 @@
 let container = document.getElementById('container');
 let cardCount = 16; // initializes desired number of cards
 let pairsRemaining = cardCount / 2;
-let cards = container.children;
+let cards;
 let flipped = [];
 let startButton = document.getElementById('start-button');
 let resetButton = document.getElementById('reset-button');
@@ -14,49 +14,9 @@ let stars = document.getElementById('star-rating');
 let modal = document.createDocumentFragment();
 
 // start and reset functionality
-startButton.addEventListener('click', function () {
-  let startTime = new Date();
-  let countTime = setInterval(count, 1000);
-  let countAgain;
-  dealCards();
-  startButton.remove();
-  resetButton.addEventListener('click', function () {
-    clearInterval(countTime);
-    clearInterval(countAgain);
-    startTime = new Date();
-    countAgain = setInterval(count, 1000);
-    randomizeCards(cards);
-    clicks = 0;
-    flipped = [];
-    pairsRemaining = cardCount / 2;
-    moves = 0;
-    moveCounter.textContent = moves;
-    for (let card of cards) {
-      if (card.classList.contains('matched')) {
-        card.classList.remove('matched');
-      }
-      if (card.classList.contains('flipped')) {
-        card.classList.remove('flipped');
-      }
-    }
-  });
-  function count () {
-    let elapsed = new Date();
-    let startMs = startTime.valueOf();
-    let elapsedMs = elapsed.valueOf();
-    let diff = elapsedMs - startMs;
-    let sec = Math.floor((diff / 1000) % 60);
-    if (sec < 10) {
-      sec = '0' + sec;
-    }
-    let min = Math.floor((((diff / 1000) - sec) / 60) % 60);
-    if (min < 10) {
-      min = '0' + min;
-    }
-    secs.textContent = sec;
-    mins.textContent = min;
-  }
-});
+let startTime;
+let countTime;
+startButton.addEventListener('click', startGame);
 
 // only allow two clicks before checking/resetting game
 let clicks = 0;
@@ -106,6 +66,56 @@ container.addEventListener('click', function (event) {
 });
 
 // function definitions
+function startGame () {
+  startTime = new Date();
+  countTime = setInterval(count, 1000);
+  dealCards();
+  startButton.remove();
+  resetButton.addEventListener('click', resetGame);
+}
+
+function count () {
+  let elapsed = new Date();
+  let startMs = startTime.valueOf();
+  let elapsedMs = elapsed.valueOf();
+  let diff = elapsedMs - startMs;
+  let sec = Math.floor((diff / 1000) % 60);
+  if (sec < 10) {
+    sec = '0' + sec;
+  }
+  let min = Math.floor((((diff / 1000) - sec) / 60) % 60);
+  if (min < 10) {
+    min = '0' + min;
+  }
+  secs.textContent = sec;
+  mins.textContent = min;
+}
+
+function resetGame () {
+  clearInterval(countTime);
+  secs.textContent = '00';
+  mins.textContent = '00';
+  startTime = new Date();
+  countTime = setInterval(count, 1000);
+  randomizeCards(cards);
+  clicks = 0;
+  flipped = [];
+  pairsRemaining = cardCount / 2;
+  moves = 0;
+  moveCounter.textContent = moves;
+  for (let card of cards) {
+    if (card.classList.contains('matched')) {
+      card.classList.remove('matched');
+    }
+    if (card.classList.contains('flipped')) {
+      card.classList.remove('flipped');
+    }
+  }
+  if (document.querySelector('dialog')) {
+    document.querySelector('dialog').remove();
+  }
+}
+
 function dealCards () {
   let cardList = document.createDocumentFragment();
   for (let x = 1; x <= cardCount; x++) {
@@ -114,7 +124,7 @@ function dealCards () {
     cardList.appendChild(card);
   }
   container.appendChild(cardList);
-  cards = container.children; // reassign var from # of cards to cards themselves
+  cards = container.children;
   let j = 1;
   for (let i = 0; i < cards.length; i += 2) {
     let card = cards[i];
@@ -158,20 +168,21 @@ function win () {
   modal.appendChild(dialog);
   let button = document.createElement('button');
   button.textContent = 'Play again';
-  modal.appendChild(button);
-  button.addEventListener('click', function () {
-    // TODO: make this functional
-  });
-  modal.appendChild(stars);
+  dialog.appendChild(button);
+  button.addEventListener('click', resetGame);
+  dialog.appendChild(stars);
   let totalMoves = document.createElement('span');
   totalMoves.textContent = moves;
-  modal.appendChild(totalMoves);
+  dialog.appendChild(totalMoves);
   let totalMins = document.createElement('span');
   let totalSecs = document.createElement('span');
   totalMins.textContent = mins.textContent;
   totalSecs.textContent = secs.textContent;
-  modal.appendChild(totalMins);
-  modal.appendChild(totalSecs);
+  dialog.appendChild(totalMins);
+  dialog.appendChild(totalSecs);
   document.body.appendChild(modal);
   dialog.showModal();
+  clearInterval(countTime);
+  secs.textContent = '00';
+  mins.textContent = '00';
 }
