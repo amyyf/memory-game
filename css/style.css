@@ -7,44 +7,54 @@
   width: 100px;
   border: 1px solid black;
   content: "";
+  background-size: cover;
+  background-color: white;
+  background-image: url("");
 }
 
-.pair-1 {
+.pair-1.flipped {
+  background-image: url("/img/building-300px-1.png");
   background-color: red;
 }
 
-.pair-2 {
+.pair-2.flipped {
+  background-image: url("/img/building-300px-2.png");
   background-color: blue;
 }
 
-.pair-3 {
+.pair-3.flipped {
+  background-image: url("/img/building-300px-3.png");
   background-color: green;
 }
 
-.pair-4 {
+.pair-4.flipped {
+  background-image: url("/img/building-300px-4.png");
   background-color: white;
 }
 
-.pair-5 {
+.pair-5.flipped {
+  background-image: url("/img/building-300px-5.png");
   background-color: black;
 }
 
-.pair-6 {
+.pair-6.flipped {
+  background-image: url("/img/building-300px-6.png");
   background-color: yellow;
 }
 
-.pair-7 {
+.pair-7.flipped {
+  background-image: url("/img/building-300px-7.png");
   background-color: purple;
 }
 
-.pair-8 {
+.pair-8.flipped {
+  background-image: url("/img/building-300px-8.png");
   background-color: pink;
 }
 
 .flipped {
-  background-color: red;
   transform: rotateY(180deg);
-  transition: transform 1s linear, background-color 0s .5s;
+  transition: transform 1s linear, background-image 0s .5s, background-color 0s .5s;
 }
 
 .matched {
