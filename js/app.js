@@ -1,17 +1,16 @@
-let container = document.getElementById('container');
-let cardCount = 16; // initializes desired number of cards
+const container = document.getElementById('container');
+const cardCount = 16; // initializes desired number of cards
+const startButton = document.getElementById('start-button');
+const resetButton = document.getElementById('reset-button');
+const mins = document.getElementById('mins');
+const secs = document.getElementById('secs');
+const moveCounter = document.getElementById('move-counter');
+const stars = document.getElementById('star-rating');
+const modal = document.createDocumentFragment();
 let pairsRemaining = cardCount / 2;
 let cards;
 let flipped = [];
-let startButton = document.getElementById('start-button');
-let resetButton = document.getElementById('reset-button');
-// let timer = document.getElementById('timer');
-let mins = document.getElementById('mins');
-let secs = document.getElementById('secs');
-let moveCounter = document.getElementById('move-counter');
 let moves = moveCounter.textContent;
-let stars = document.getElementById('star-rating');
-let modal = document.createDocumentFragment();
 
 // start and reset functionality
 let startTime;
@@ -20,7 +19,7 @@ startButton.addEventListener('click', startGame);
 
 // only allow two clicks before checking/resetting game
 let clicks = 0;
-let maxClicks = 2;
+const maxClicks = 2;
 container.addEventListener('click', function (event) {
   if (clicks >= maxClicks) {
     return;
@@ -44,18 +43,17 @@ container.addEventListener('click', function (event) {
   card1.className === card2.className ? cardsMatch(card1, card2) : noMatch(card1, card2);
   flipped = [];
   clicks = 0; // resets data structure to allow play to continue
-  console.log(flipped);
 
   // scoring/game-end logic
   if (pairsRemaining > 0) {
-    console.log(pairsRemaining);
+    return;
   } else {
     win();
   }
 
   // star rating
-  let loseOne = (cardCount / 2) * 1.25;
-  let loseTwo = (cardCount / 2) * 1.6;
+  const loseOne = (cardCount / 2) * 1.25;
+  const loseTwo = (cardCount / 2) * 1.6;
   if (moves > loseOne && moves < loseTwo) {
     let starThree = stars.lastChild;
     starThree.classList.add('lost');
@@ -75,10 +73,10 @@ function startGame () {
 }
 
 function count () {
-  let elapsed = new Date();
-  let startMs = startTime.valueOf();
-  let elapsedMs = elapsed.valueOf();
-  let diff = elapsedMs - startMs;
+  const elapsed = new Date();
+  const startMs = startTime.valueOf();
+  const elapsedMs = elapsed.valueOf();
+  const diff = elapsedMs - startMs;
   let sec = Math.floor((diff / 1000) % 60);
   if (sec < 10) {
     sec = '0' + sec;
@@ -136,7 +134,7 @@ function dealCards () {
 }
 
 function randomizeCards (cardsList) {
-  let newOrder = document.createDocumentFragment();
+  const newOrder = document.createDocumentFragment();
   for (let i = 0; i < cardsList.length; i++) {
     let randomNum = Math.floor(Math.random() * cardsList.length);
     let currentCard = cardsList[i];
@@ -163,19 +161,19 @@ function noMatch (card1, card2) {
 }
 
 function win () {
-  let dialog = document.createElement('dialog');
+  const dialog = document.createElement('dialog');
   dialog.textContent = 'Congratulations, you won! Would you like to play again?';
   modal.appendChild(dialog);
-  let button = document.createElement('button');
+  const button = document.createElement('button');
   button.textContent = 'Play again';
   dialog.appendChild(button);
   button.addEventListener('click', resetGame);
   dialog.appendChild(stars);
-  let totalMoves = document.createElement('span');
+  const totalMoves = document.createElement('span');
   totalMoves.textContent = moves;
   dialog.appendChild(totalMoves);
-  let totalMins = document.createElement('span');
-  let totalSecs = document.createElement('span');
+  const totalMins = document.createElement('span');
+  const totalSecs = document.createElement('span');
   totalMins.textContent = mins.textContent;
   totalSecs.textContent = secs.textContent;
   dialog.appendChild(totalMins);
