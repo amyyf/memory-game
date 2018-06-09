@@ -40,11 +40,14 @@ container.addEventListener('click', function (event) {
   let card1 = flipped[0];
   let card2 = flipped[1];
 
-  card1.className === card2.className ? cardsMatch(card1, card2) : noMatch(card1, card2);
-  // resets data structure to allow play to continue
-  flipped = [];
-  clicks = 0;
-  countStars();
+  window.setTimeout(checkCards, 2000);
+  function checkCards () {
+    card1.className === card2.className ? cardsMatch(card1, card2) : noMatch(card1, card2);
+    // resets data structure to allow play to continue
+    flipped = [];
+    clicks = 0;
+    countStars();
+  }
 
   // scoring/game-end logic
   if (pairsRemaining > 0) {
