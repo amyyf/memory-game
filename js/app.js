@@ -47,13 +47,12 @@ container.addEventListener('click', function (event) {
     flipped = [];
     clicks = 0;
     countStars();
-  }
-
-  // scoring/game-end logic
-  if (pairsRemaining > 0) {
-    return;
-  } else {
-    win();
+    // scoring/game-end logic
+    if (pairsRemaining > 0) {
+      return;
+    } else {
+      win();
+    }
   }
 });
 
