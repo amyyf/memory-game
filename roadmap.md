@@ -31,7 +31,7 @@
 - [ ] add dependencies and sources to README
 
 ## Fixes
-- [ ] second star being lost is incorrect - the first child is the one with the class 'lost' being added
+- [x] second star being lost is incorrect - the first child is the one with the class 'lost' being added
 - [ ] win function no longer working!!
 
 **The cards always exist - what changes is the order (via JS) or the styling (via JS events and CSS styles)**

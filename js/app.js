@@ -159,15 +159,15 @@ function noMatch (card1, card2) {
 }
 
 function countStars () {
-  // magic numbers to calculate how many moves are allowed before a star is lost
+  // magic numbers calculate how many moves are allowed before a star is lost
   const loseOne = (cardCount / 2) * 1.25;
   const loseTwo = (cardCount / 2) * 1.6;
   if (moves > loseOne && moves < loseTwo) {
     let starThree = stars.lastChild;
-    starThree.classList.add('lost');
+    starThree.className = 'far fa-star';
   } else if (moves > loseTwo) {
-    let starTwo = stars.firstChild.nextSibling;
-    starTwo.classList.add('lost');
+    let starTwo = stars.lastChild.previousSibling;
+    starTwo.className = 'far fa-star';
   }
 }
 
