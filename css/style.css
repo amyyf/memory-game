@@ -67,6 +67,12 @@ body {
   font-size: .75em;
 }
 
+.play-again-button {
+  max-width: 50%;
+  align-self: center;
+  margin-top: 1em;
+}
+
 .reset-button {
   display: none;
 }
@@ -178,4 +184,6 @@ body {
 .modal {
   position: absolute;
   top: 10px;
+  display: flex;
+  flex-direction: column;
 }

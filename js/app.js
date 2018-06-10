@@ -66,6 +66,7 @@ function startGame () {
   startButton.remove();
   resetButton.className = 'button';
   resetButton.addEventListener('click', resetGame);
+  win();
 }
 
 function count () {
@@ -98,6 +99,10 @@ function resetGame () {
   pairsRemaining = cardCount / 2;
   moves = 0;
   moveCounter.textContent = moves;
+  let starThree = stars.lastChild;
+  starThree.className = 'fas fa-star';
+  let starTwo = stars.lastChild.previousSibling;
+  starTwo.className = 'fas fa-star';
   // remove current cards and create new cards to avoid glitchy tranforms while randomizing
   while (container.lastChild) {
     container.removeChild(container.lastChild);
@@ -184,25 +189,28 @@ function win () {
 
 function createModal () {
   const dialog = document.createElement('dialog');
+  const widgetDiv = document.createElement('div');
   const button = document.createElement('button');
   const totalMoves = document.createElement('span');
   const totalSecs = document.createElement('span');
   const totalMins = document.createElement('span');
   dialog.textContent = 'Congratulations, you won! Would you like to play again?';
   dialog.classList.add('p-text');
-  dialog.classList.add('widgets');
   dialog.classList.add('modal');
   button.textContent = 'Play again';
   button.classList.add('button');
+  button.classList.add('play-again-button');
+  widgetDiv.classList.add('widgets');
   totalMoves.textContent = moves + ' moves';
   totalMins.textContent = mins.textContent + ' minutes';
   totalSecs.textContent = secs.textContent + ' seconds';
   modal.appendChild(dialog);
   dialog.appendChild(button);
-  dialog.appendChild(stars);
-  dialog.appendChild(totalMoves);
-  dialog.appendChild(totalMins);
-  dialog.appendChild(totalSecs);
+  dialog.appendChild(widgetDiv);
+  widgetDiv.appendChild(stars.cloneNode(true));
+  widgetDiv.appendChild(totalMoves);
+  widgetDiv.appendChild(totalMins);
+  widgetDiv.appendChild(totalSecs);
   const first = document.body.firstChild;
   document.body.insertBefore(modal, first);
 }
