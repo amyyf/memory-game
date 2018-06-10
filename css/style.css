@@ -1,24 +1,16 @@
 #container {
   display: grid;
-  grid-template: repeat(4, 1fr) / repeat(4, 1fr);
-  grid-gap: 10px 10px;
-  place-items: center;
-  justify-content: stretch;
-  box-sizing: border-box;
-  padding: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-gap: 1rem;
+  width: 75%;
+  max-width: 550px;
   margin: auto;
-  width: 100%;
-  max-width: 475px;
-}
-
-@media screen and (min-width: 550px) {
-  #container {
-    background-color: white;
-  }
+  padding: 1rem 0;
 }
 
 .widgets {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
 }
 
@@ -26,14 +18,28 @@
   display: flex;
 }
 
+.head {
+  font-family: 'BioRhyme Expanded', serif;
+  font-size: 1em;
+  text-align: center;
+}
+
+@media screen and (min-width: 450px) {
+  .head {
+    font-size: 1.5em;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .head {
+    font-size: 2em;
+  }
+}
+
 .card {
-  max-height: 100px;
-  max-width: 100px;
-  height: 100%;
-  width: 100%;
-  padding-bottom: 100%;
+  height: 100px;
+  width: 100px;
   box-sizing: border-box;
-  content: "";
   background-size: cover;
   background-color: black;
   background-image: url("");
