@@ -33,5 +33,6 @@
 ## Fixes
 - [x] second star being lost is incorrect - the first child is the one with the class 'lost' being added
 - [ ] win function no longer working!!
+- [ ] reset button buggy if clicked while cards are transitioning - set delay?
 
 **The cards always exist - what changes is the order (via JS) or the styling (via JS events and CSS styles)**

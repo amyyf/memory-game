@@ -4,16 +4,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <title>Memory Game</title>
-    <link href="https://fonts.googleapis.com/css?family=BioRhyme+Expanded" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=BioRhyme+Expanded|Montserrat" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
     <h1 class="head">Match the Buildings</h1>
-    <p>Here are the instructions for the game.</p>
+    <p class="p-text callout">This is a game of concentration.</p>
+    <p class="p-text">Flip over the cards to find matching pairs. You may only turn over two cards at a time, and the more moves you make, the lower your rating will drop! To win the game, find all the matching pairs as quickly as you can.</p>
+    <div id="button-container">
+      <button type="button" name="start-button" id="start-button" class="button">Play the game!</button>
+      <button type="button" name="reset-button" id="reset-button" class="reset-button">Reset</button>
+    </div>
     <section class="widgets">
-      <button type="button" name="start-button" id="start-button">Play the game!</button>
-      <button type="button" name="reset-button" id="reset-button">Reset</button>
       <div id="timer"><span class="widget-text">Time:</span><span id="mins">00</span>:<span id="secs">00</span></div>
       <div id="moves"><span class="widget-text">Moves:</span><span id="move-counter">0</span></div>
       <span id="star-rating"><span class="widget-text">Rating:</span><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>

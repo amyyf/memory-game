@@ -64,6 +64,7 @@ function startGame () {
   dealCards();
   randomizeCards(cards);
   startButton.remove();
+  resetButton.className = 'button';
   resetButton.addEventListener('click', resetGame);
 }
 
