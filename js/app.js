@@ -9,12 +9,13 @@ const stars = document.getElementById('star-rating');
 const modal = document.createDocumentFragment();
 let pairsRemaining = cardCount / 2;
 let cards;
+let cardCheckTimeout;
 let flipped = [];
 let moves = moveCounter.textContent;
 
 // start and reset functionality
 let startTime;
-let timer;
+let timer = 0;
 startButton.addEventListener('click', startGame);
 
 // only allow two clicks before checking/resetting game
@@ -40,7 +41,7 @@ container.addEventListener('click', function (event) {
   let card1 = flipped[0];
   let card2 = flipped[1];
 
-  window.setTimeout(checkCards, 2000);
+  cardCheckTimeout = window.setTimeout(checkCards, 2000);
   function checkCards () {
     card1.className === card2.className ? cardsMatch(card1, card2) : noMatch(card1, card2);
     // resets data structure to allow play to continue
@@ -85,29 +86,27 @@ function count () {
 }
 
 function resetGame () {
+  clearTimeout(cardCheckTimeout);
   clearInterval(timer);
   secs.textContent = '00';
   mins.textContent = '00';
   startTime = new Date();
   timer = setInterval(count, 1000);
-  randomizeCards(cards);
   // reset all variables to start new game
   clicks = 0;
   flipped = [];
   pairsRemaining = cardCount / 2;
   moves = 0;
   moveCounter.textContent = moves;
-  for (let card of cards) {
-    if (card.classList.contains('matched')) {
-      card.classList.remove('matched');
-    }
-    if (card.classList.contains('flipped')) {
-      card.classList.remove('flipped');
-    }
+  // remove current cards and create new cards to avoid glitchy tranforms while randomizing
+  while (container.lastChild) {
+    container.removeChild(container.lastChild);
   }
   if (document.querySelector('dialog')) {
     document.querySelector('dialog').remove();
   }
+  dealCards();
+  randomizeCards(cards);
 }
 
 function dealCards () {
@@ -161,7 +160,7 @@ function noMatch (card1, card2) {
 function countStars () {
   // magic numbers calculate how many moves are allowed before a star is lost
   const loseOne = (cardCount / 2) * 1.25;
-  const loseTwo = (cardCount / 2) * 1.6;
+  const loseTwo = (cardCount / 2) * 2;
   if (moves > loseOne && moves < loseTwo) {
     let starThree = stars.lastChild;
     starThree.className = 'far fa-star';
