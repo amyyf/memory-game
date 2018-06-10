@@ -190,15 +190,20 @@ function createModal () {
   const totalSecs = document.createElement('span');
   const totalMins = document.createElement('span');
   dialog.textContent = 'Congratulations, you won! Would you like to play again?';
+  dialog.classList.add('p-text');
+  dialog.classList.add('widgets');
+  dialog.classList.add('modal');
   button.textContent = 'Play again';
-  totalMoves.textContent = moves;
-  totalMins.textContent = mins.textContent;
-  totalSecs.textContent = secs.textContent;
+  button.classList.add('button');
+  totalMoves.textContent = moves + ' moves';
+  totalMins.textContent = mins.textContent + ' minutes';
+  totalSecs.textContent = secs.textContent + ' seconds';
   modal.appendChild(dialog);
   dialog.appendChild(button);
   dialog.appendChild(stars);
   dialog.appendChild(totalMoves);
   dialog.appendChild(totalMins);
   dialog.appendChild(totalSecs);
-  document.body.appendChild(modal);
+  const first = document.body.firstChild;
+  document.body.insertBefore(modal, first);
 }
