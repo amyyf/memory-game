@@ -1,23 +1,32 @@
-## Building a web version of Concentration from scratch!
+# Building a web version of Concentration from scratch!
 
-### Instructions from Udacity:
+This is a web version of your typical memory card game, where the player clicks or taps cards to turn them over and reveal the image on the other side, with the goal of matching all pairs as quickly as possible.
 
-How The Game Works
-The game board consists of sixteen "cards" arranged in a grid. The deck is made up of eight different pairs of cards, each with different symbols on one side. The cards are arranged randomly on the grid with the symbol face down. The gameplay rules are very simple: flip over two hidden cards at a time to locate the ones that match!
+### Why Concentration?
 
-Each turn:
+This is the second project for my Front-End Nanodegree through [Udacity](https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001), for which I was awarded a merit scholarship by [Grow with Google](https://grow.google/). It's the first significant app I've built from scratch (yep, I chose to eschew the starter files!) combining my knowledge of HTML, CSS, and JavaScript.
 
-The player flips one card over to reveal its underlying symbol.
-The player then turns over a second card, trying to find the corresponding card with the same symbol.
-If the cards match, both cards stay flipped over.
-If the cards do not match, both cards are flipped face down.
-The game ends once all cards have been correctly matched.
+Because I'm interested in architecture, I chose to have players match buildings from around the world (see image links below for a list of buildings).
+
+### How The Game Works
+
+The cards for gameplay are built in the DOM. Each time the game is started or reset, the cards are rebuilt and randomized. Matches are determined by comparing CSS classes (`pair-1`, `pair-2`, etc.) whenever two cards have been clicked. The app tracks clicks and moves, times gameplay, and calculates a "rating" based on how many moves a player takes to find all matches.
+
+### Usage and Contribution Guidelines
+
+The game has no dependencies. It does make use of [Font Awesome](https://fontawesome.com/) and [Google Fonts](https://fonts.google.com/), which it accesses through `stylesheet` links in the document head rather than making you download them.
+
+If you encounter an error while using, I would be so thrilled to be notified!!
+
+Please submit an issue if you find one and don't want to fix it yourself. If you do want to fix an issue yourself, or if you'd like to update a feature, please create your pull request on a new branch rather than on the master branch so I can easily merge it in.
+
+I am not looking to implement new features at this point, but perhaps in the future. Nothing is ever finished, right?
 
 
 ### Image credits
-All photos sourced from Pexels under the Creative Commons Zero (CCO) license and edited by me.
+All photos sourced from [Pexels](https://www.pexels.com/) under the Creative Commons Zero (CCO) license and edited by me.
 
-**Image Links**
+**Original Image Links**
 * [Flatiron Building, NYC](https://www.pexels.com/photo/low-angle-photo-of-flatiron-building-1123982/)
 * [Eiffel Tower, Paris](https://www.pexels.com/photo/ancient-architectural-architecture-black-604444/)
 * [Opera House, Sydney](https://www.pexels.com/photo/australia-house-sydney-vivid-54610/)
@@ -26,3 +35,7 @@ All photos sourced from Pexels under the Creative Commons Zero (CCO) license and
 * [Big Ben (*Elizabeth Tower*), London](https://www.pexels.com/photo/london-night-lights-bridge-50632/)
 * [Oriental Pearl Tower, Shanghai](https://www.pexels.com/photo/night-skyline-skyscrapers-shanghai-19885/)
 * [Burj Al Arab, Dubai](https://www.pexels.com/photo/sea-beach-holiday-vacation-2352/)
+
+### License
+
+This is a student project, but I did spend a lot of hours on it! Please feel free to use, but please let me know if you do so.

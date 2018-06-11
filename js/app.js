@@ -66,7 +66,6 @@ function startGame () {
   startButton.remove();
   resetButton.className = 'button';
   resetButton.addEventListener('click', resetGame);
-  win();
 }
 
 function count () {
