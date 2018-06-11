@@ -8,7 +8,7 @@ This is the second project for my Front-End Nanodegree through [Udacity](https:/
 
 Because I'm interested in architecture, I chose to have players match buildings from around the world (see image links below for a list of buildings).
 
-### How The Game Works
+### How the Game Works
 
 The cards for gameplay are built in the DOM. Each time the game is started or reset, the cards are rebuilt and randomized. Matches are determined by comparing CSS classes (`pair-1`, `pair-2`, etc.) whenever two cards have been clicked. The app tracks clicks and moves, times gameplay, and calculates a "rating" based on how many moves a player takes to find all matches.
 
@@ -23,7 +23,8 @@ Please submit an issue if you find one and don't want to fix it yourself. If you
 I am not looking to implement new features at this point, but perhaps in the future. Nothing is ever finished, right?
 
 
-### Image credits
+### Image Credits
+
 All photos sourced from [Pexels](https://www.pexels.com/) under the Creative Commons Zero (CCO) license and edited by me.
 
 **Original Image Links**
@@ -35,6 +36,15 @@ All photos sourced from [Pexels](https://www.pexels.com/) under the Creative Com
 * [Big Ben (*Elizabeth Tower*), London](https://www.pexels.com/photo/london-night-lights-bridge-50632/)
 * [Oriental Pearl Tower, Shanghai](https://www.pexels.com/photo/night-skyline-skyscrapers-shanghai-19885/)
 * [Burj Al Arab, Dubai](https://www.pexels.com/photo/sea-beach-holiday-vacation-2352/)
+
+### Other Sources of Help
+
+A few pages I referenced while coding:
+* https://ux.stackexchange.com/questions/91672/how-to-limit-mouse-clicks-in-javascript
+* [CSS-Tricks](https://css-tricks.com), and especially [this article]((https://css-tricks.com/auto-sizing-columns-css-grid-auto-fill-vs-auto-fit/)) by Sara Soueidan
+* [My own time-tracking project](https://codepen.io/amyyf/pen/GxajKb)
+* [MDN, always and forever](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Auto-placement_in_CSS_Grid_Layout)
+
 
 ### License
 
