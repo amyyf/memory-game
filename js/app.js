@@ -41,7 +41,7 @@ container.addEventListener('click', function (event) {
   let card1 = flipped[0];
   let card2 = flipped[1];
 
-  cardCheckTimeout = window.setTimeout(checkCards, 2000);
+  cardCheckTimeout = window.setTimeout(checkCards, 1500);
   function checkCards () {
     card1.className === card2.className ? cardsMatch(card1, card2) : noMatch(card1, card2);
     // resets data structure to allow play to continue
@@ -106,8 +106,13 @@ function resetGame () {
   while (container.lastChild) {
     container.removeChild(container.lastChild);
   }
-  if (document.querySelector('dialog')) {
-    document.querySelector('dialog').remove();
+  if (document.getElementsByClassName('modal')) {
+    const dialogDiv = document.getElementsByClassName('modal')[0];
+    dialogDiv.remove();
+  }
+  if (document.getElementsByClassName('background')) {
+    const dialogBackground = document.getElementsByClassName('background')[0];
+    dialogBackground.remove();
   }
   dealCards();
   randomizeCards(cards);
@@ -176,9 +181,8 @@ function countStars () {
 
 function win () {
   createModal();
-  const dialog = document.querySelector('dialog');
-  dialog.showModal();
-  const button = dialog.querySelector('button');
+  const dialogDiv = document.getElementsByClassName('modal')[0];
+  const button = dialogDiv.querySelector('button');
   button.addEventListener('click', resetGame);
   // stop timer after game ends
   clearInterval(timer);
@@ -187,15 +191,17 @@ function win () {
 }
 
 function createModal () {
-  const dialog = document.createElement('dialog');
+  const dialogBackground = document.createElement('div');
+  const dialogDiv = document.createElement('div');
   const widgetDiv = document.createElement('div');
   const button = document.createElement('button');
   const totalMoves = document.createElement('span');
   const totalSecs = document.createElement('span');
   const totalMins = document.createElement('span');
-  dialog.textContent = 'Congratulations, you won! Would you like to play again?';
-  dialog.classList.add('p-text');
-  dialog.classList.add('modal');
+  dialogBackground.classList.add('background');
+  dialogDiv.textContent = 'Congratulations, you won! Would you like to play again?';
+  dialogDiv.classList.add('p-text');
+  dialogDiv.classList.add('modal');
   button.textContent = 'Play again';
   button.classList.add('button');
   button.classList.add('play-again-button');
@@ -203,9 +209,10 @@ function createModal () {
   totalMoves.textContent = moves + ' moves';
   totalMins.textContent = mins.textContent + ' minutes';
   totalSecs.textContent = secs.textContent + ' seconds';
-  modal.appendChild(dialog);
-  dialog.appendChild(button);
-  dialog.appendChild(widgetDiv);
+  dialogBackground.appendChild(dialogDiv);
+  modal.appendChild(dialogBackground);
+  dialogDiv.appendChild(button);
+  dialogDiv.appendChild(widgetDiv);
   widgetDiv.appendChild(stars.cloneNode(true));
   widgetDiv.appendChild(totalMoves);
   widgetDiv.appendChild(totalMins);
