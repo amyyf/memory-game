@@ -43,7 +43,7 @@ A few pages I referenced while coding:
 * https://ux.stackexchange.com/questions/91672/how-to-limit-mouse-clicks-in-javascript
 * [CSS-Tricks](https://css-tricks.com), and especially [this article](https://css-tricks.com/auto-sizing-columns-css-grid-auto-fill-vs-auto-fit/) by Sara Soueidan
 * [My own time-tracking project](https://codepen.io/amyyf/pen/GxajKb)
-* [MDN, always and forever](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Auto-placement_in_CSS_Grid_Layout)
+* [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Auto-placement_in_CSS_Grid_Layout), always and forever
 
 
 ### License

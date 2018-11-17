@@ -210,3 +210,17 @@ body {
   padding: 1em;
   box-sizing: border-box;
 }
+
+.buildings-list > h2 {
+  font-size: 1em;
+  text-align: center;
+}
+
+.buildings-list > ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.buildings-list > ul > li {
+  padding: 0.5em 0;
+}

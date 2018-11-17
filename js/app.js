@@ -7,6 +7,56 @@ const secs = document.getElementById('secs');
 const moveCounter = document.getElementById('move-counter');
 const stars = document.getElementById('star-rating');
 const modal = document.createDocumentFragment();
+const buildings = [
+  {
+    name: 'Flatiron Building',
+    location: 'New York, New York',
+    height: '285&nbspft / 87&nbspm',
+    wikiUrl: 'https://en.wikipedia.org/wiki/Flatiron_Building'
+  },
+  {
+    name: 'Eiffel Tower',
+    location: 'Paris, France',
+    height: '1,063&nbspft / 324&nbspm',
+    wikiUrl: 'https://en.wikipedia.org/wiki/Eiffel_Tower'
+  },
+  {
+    name: 'Sydney Opera House',
+    location: 'Sydney, Australia',
+    height: '213&nbspft / 65&nbspm',
+    wikiUrl: 'https://en.wikipedia.org/wiki/Sydney_Opera_House'
+  },
+  {
+    name: 'Taipei 101',
+    location: 'Taipei, Taiwan',
+    height: '1,671&nbspft / 509.2&nbspm',
+    wikiUrl: 'https://en.wikipedia.org/wiki/Taipei_101'
+  },
+  {
+    name: 'Leaning Tower of Pisa',
+    location: 'Pisa, Italy',
+    height: '183.3&nbspft / 55.86&nbspm',
+    wikiUrl: 'https://en.wikipedia.org/wiki/Leaning_Tower_of_Pisa'
+  },
+  {
+    name: 'Elizabeth Tower (Big Ben)',
+    location: 'London, England',
+    height: '315&nbspft / 96&nbspm',
+    wikiUrl: 'https://en.wikipedia.org/wiki/Big_Ben'
+  },
+  {
+    name: 'Oriental Pearl Tower',
+    location: 'Shanghai, China',
+    height: '1,535&nbspft / 467.9&nbspm',
+    wikiUrl: 'https://en.wikipedia.org/wiki/Oriental_Pearl_Tower'
+  },
+  {
+    name: 'Burj Al Arab',
+    location: 'Dubai, United Arab Emirates',
+    height: '1,053&nbspft / 321&nbspm',
+    wikiUrl: 'https://en.wikipedia.org/wiki/Burj_Al_Arab'
+  }
+];
 let pairsRemaining = cardCount / 2;
 let cards;
 let cardCheckTimeout;
@@ -190,6 +240,23 @@ function win () {
   mins.textContent = '00';
 }
 
+function buildBuildingsList () {
+  const div = document.createElement('div');
+  const ul = document.createElement('ul');
+  const header = document.createElement('h2');
+  buildings.forEach(building => {
+    let li = document.createElement('li');
+    li.innerHTML = `
+      <a href=${building.wikiUrl} target='_blank'>${building.name}</a> | ${building.location} | ${building.height}
+    `;
+    ul.appendChild(li);
+  });
+  header.textContent = 'Learn more about the buildings you just matched:';
+  div.appendChild(header);
+  div.appendChild(ul);
+  return div;
+}
+
 function createModal () {
   const dialogBackground = document.createElement('div');
   const dialogDiv = document.createElement('div');
@@ -198,6 +265,7 @@ function createModal () {
   const totalMoves = document.createElement('span');
   const totalSecs = document.createElement('span');
   const totalMins = document.createElement('span');
+  const buildingsList = buildBuildingsList();
   dialogBackground.classList.add('background');
   dialogDiv.textContent = 'Congratulations, you won! Would you like to play again?';
   dialogDiv.classList.add('p-text');
@@ -206,6 +274,7 @@ function createModal () {
   button.classList.add('button');
   button.classList.add('play-again-button');
   widgetDiv.classList.add('widgets');
+  buildingsList.classList.add('buildings-list');
   totalMoves.textContent = moves + ' moves';
   totalMins.textContent = mins.textContent + ' minutes';
   totalSecs.textContent = secs.textContent + ' seconds';
@@ -213,6 +282,7 @@ function createModal () {
   modal.appendChild(dialogBackground);
   dialogDiv.appendChild(button);
   dialogDiv.appendChild(widgetDiv);
+  dialogDiv.appendChild(buildingsList);
   widgetDiv.appendChild(stars.cloneNode(true));
   widgetDiv.appendChild(totalMoves);
   widgetDiv.appendChild(totalMins);

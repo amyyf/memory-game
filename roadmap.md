@@ -28,7 +28,7 @@
      https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 - start button for initial shuffle?
 - [x] how to keep container from flipping
-- [ ] add dependencies and sources to README
+- [x] add dependencies and sources to README
 
 ## Fixes
 - [x] second star being lost is incorrect - the first child is the one with the class 'lost' being added
